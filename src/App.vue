@@ -1,12 +1,11 @@
 <script setup>
-
 import FillTheForm from '@/components/FillTheForm.vue'
 import Result from '@/components/Result.vue'
-import Button from '@/components/Button.vue'
+
 // cria um objeto reativo que recebe o que vem de salvar
-import {reactive} from 'vue'
+import { reactive } from 'vue'
 const dados = reactive({
-  Nome: '',
+  Nome: 'dfdd',
   Sobrenome: '',
   Email: '',
   Endereco: '',
@@ -17,15 +16,15 @@ const dados = reactive({
   Hobbies: [],
   LinguagemPreferida: []
 })
-
+function salvar(item) {
+  Object.assign(dados, item)
+}
 </script>
 
 <template>
   <main class="container">
-    
-<fill-the-form />
-<Button></Button>
-<result @submit.prevent="salvarPerfil" />
+    <fill-the-form @salvar="salvar" />
+    <result :dados="dados" />
   </main>
 </template>
 

@@ -1,18 +1,19 @@
+<!-- eslint-disable no-undef -->
 <script setup>
-import { ref} from 'vue';
-
-const dados = ref([
-{id:1, Nome:``},
-{id:2, Sobrenome:``},
-{id:3, Email:``}, 
-{id:4, Endereco:``},
-{id:5, Senha:``},
-{id:6, Confirmar:``},
-{id:7, Cidade:``},
-{id:8, Estado:``},
-{id:9, Hobbie:``},
-{id:10, LinguagemPreferida:``}
-]);
+import { ref, reactive} from 'vue';
+const emit = defineEmits(['salvar'])
+const dados = reactive({
+  Nome: '',
+  Sobrenome: '',
+  Email: '',
+  Endereco: '',
+  Senha: '',
+  Confirmar: '',
+  Cidade: '',
+  Estado: '',
+  Hobbies: [],
+  LinguagemPreferida: []
+});
 
 const estados = [
   { uf: 'AC', name: 'Acre' },
@@ -43,10 +44,25 @@ const estados = [
   { uf: 'SE', name: 'Sergipe' },
   { uf: 'TO', name: 'Tocantins' }
 ];
+
+const mostrarPerfil = ref(true);
+
+
+
+function salvarPerfil() {
+  // if (LinguagemPreferida.value === '' || dados.Confirmar !== dados.Senha) {
+  //   alert('Preencha todos os campos corretamente');
+  // } else {
+  //   mostrarPerfil.value = false;
+    
+  // }
+emit('salvar', {...dados})
+}
+
 </script>
 <template>
   <h1>Formulário de cadastro</h1>
-  <form ><div class="row">
+  <form @submit.prevent="salvarPerfil" ><div class="row">
           <div class="areas">
             <label for="nome">Insira o seu nome:</label>
             <input type="text" id="nome" v-model="dados.Nome" placeholder="Digite seu nome" required />
@@ -87,7 +103,7 @@ const estados = [
           <div class="area">
             <p>Hobbies:</p>
             <input type="checkbox" id="hobbies1" value="esportes" v-model="dados.Hobbies" />
-            <label for="hobbies1">Esportes</label>
+            <label for="hobbies1" >Esportes</label>
             <input type="checkbox" id="hobbies2" value="música" v-model="dados.Hobbies" />
             <label for="hobbies2">Música</label>
             <input type="checkbox" id="hobbies3" value="viagens" v-model="dados.Hobbies" />
@@ -123,8 +139,11 @@ const estados = [
             </div>
           </div>
         </div>
+        <div id="buttons">
+          <input type="submit" value="Enviar" >
+        </div>
       </form>
-        
+      
 </template>
 <style scoped>
 
@@ -153,5 +172,18 @@ select {
   border: solid rgb(128, 128, 128) 2px;
   border-radius: 4px;
   padding: 5px;
+}
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  border: solid black;
 }
 </style>
