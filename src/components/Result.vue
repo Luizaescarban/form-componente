@@ -3,7 +3,7 @@
 defineProps(['dados'])
 </script>
 <template>
-  <div >
+  <div>
     <h1>Dados do produto</h1>
     <p>Nome: {{ dados.Nome }}</p>
     <p>Sobrenome: {{ dados.Sobrenome }}</p>

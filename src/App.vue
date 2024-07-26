@@ -3,9 +3,10 @@ import FillTheForm from '@/components/FillTheForm.vue'
 import Result from '@/components/Result.vue'
 
 // cria um objeto reativo que recebe o que vem de salvar
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
+const MostrarPerfil = ref(false)
 const dados = reactive({
-  Nome: 'dfdd',
+  Nome: '',
   Sobrenome: '',
   Email: '',
   Endereco: '',
@@ -18,13 +19,14 @@ const dados = reactive({
 })
 function salvar(item) {
   Object.assign(dados, item)
+  MostrarPerfil.value = true
 }
 </script>
 
 <template>
   <main class="container">
-    <fill-the-form @salvar="salvar" />
-    <result :dados="dados" />
+    <result v-if="MostrarPerfil === true" :dados="dados" />
+    <fill-the-form @salvar="salvar" v-else />
   </main>
 </template>
 
