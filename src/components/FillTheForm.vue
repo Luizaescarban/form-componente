@@ -154,7 +154,7 @@ function salvarPerfil() {
       </div>
     </div>
     <div id="buttons">
-      <input type="submit" value="Enviar" />
+      <input  class="button" type="submit" value="Enviar" />
     </div>
   </form>
 </template>
@@ -192,7 +192,7 @@ select {
   align-items: center;
 }
 
-button {
+.button {
   padding: 10px;
   background-color: black;
   color: white;
